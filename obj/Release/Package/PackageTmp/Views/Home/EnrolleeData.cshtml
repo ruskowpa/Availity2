@@ -1,0 +1,58 @@
+﻿@{var userFiles = ViewData["userFiles"] as List<Availity.Models.BusinessModels.CSVFile>;}
+@{var userInsurnaceFiles = ViewData["userInsurnaceFiles"] as List<Availity.Models.BusinessModels.InsuranceFile>;}
+
+@{
+    Layout = "";
+}
+
+<div class="table-responsive">
+    <table class="table table-sm table-striped table-bordered mt-3">
+        <thead>
+            <tr>
+                <th class="p-0" colspan="7">
+                    <div class="card-header">
+                        Review Enrollee Files
+                    </div>
+                </th>
+            </tr>
+            <tr class="text-center">
+                <th>File Name</th>
+                <th>Number of Enrollees Submitted</th>
+                <th>Download Original</th>
+                <th>Download Revised</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            @foreach (var userFile in userFiles)
+            {
+                <tr>
+                    <td>@userFile.FileName</td>
+                    <td>@userFile.EnrolleeCount</td>
+                    <td>
+
+                        <a class="btn btn-link btn-sm" href="~/Home/GetCSVFile?fileId=@userFile.FileID">
+                            <svg data-file-id="@userFile.FileID" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                            </svg>
+                            @userFile.FileName
+                        </a>
+                    </td>
+                    <td>
+                        @foreach (var userInsuranceFile in userInsurnaceFiles.Where(x => x.ParentFileID == userFile.FileID))
+                        {
+                            <a class="btn btn-link btn-sm" href="~/Home/GetInsuranceFiles?fileId=@userInsuranceFile.FileID">
+                                <svg data-file-id="@userFile.FileID" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                    <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                                </svg>
+                                @userInsuranceFile.FileName
+                            </a>
+                        }
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
