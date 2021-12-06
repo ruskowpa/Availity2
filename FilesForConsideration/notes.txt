@@ -1,0 +1,23 @@
+I created this web app for the coding assessment.. 
+
+it is hosted at patrickruskowski.com
+
+you also probably can run it on your local and point it to my godaddy sql server, just add the right connection strings in the web.config.
+
+tables used are anything in Test Schema, and dbo.Enrollee, dbo.CSVFile, dbo.InsuranceFile
+
+There are a few notes.  
+The first is that I created this admin account.  The admin can approve (mark as reviewed) new users.
+
+username - admin@test.com
+password - Test1234!
+
+Then there is a registration for new users.
+
+Once a new user is created through the register functionality, then will then need to be marked as reviewed (login as admin user, and mark them as reviewed) then the user created can then upload CSV files.
+
+Most of the front end code is in the HomeController and the Index.cshtml view for that controller.  The Login screen is under Views/Account/Register
+
+I used js inside the cshtml just tokeep it simple.  othwerwise I would have done external.
+
+There also is code in DataManager.cs and DataRepository.cs
